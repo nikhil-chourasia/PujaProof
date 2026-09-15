@@ -1,13 +1,32 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Loader2, Users } from 'lucide-react';
 
 export default function Waitlist() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  const fetchCount = async () => {
+    try {
+      const res = await fetch('/api/waitlist');
+      if (res.ok) {
+        const data = await res.json();
+        if (typeof data.count === 'number') {
+          setWaitlistCount(data.count);
+        }
+      }
+    } catch {
+      // Silently ignore count fetch error
+    }
+  };
+
+  useEffect(() => {
+    fetchCount();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +50,7 @@ export default function Waitlist() {
         setStatus('success');
         setMessage(data.message || "Thanks for joining our waitlist!");
         setEmail('');
+        fetchCount();
       } else {
         setStatus('error');
         setMessage(data.error || 'Something went wrong. Please try again.');
@@ -47,14 +67,27 @@ export default function Waitlist() {
         
         <Link 
           href="/" 
-          className="mb-12 text-sm font-medium text-puja-secondary flex items-center gap-2 hover:text-puja-text transition-colors"
+          className="mb-8 text-sm font-medium text-puja-secondary flex items-center gap-2 hover:text-puja-text transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
 
+
         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.15] mb-6 text-puja-text">
           We'll let you know when its done
         </h1>
+        
+        {waitlistCount !== null && (
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-puja-accent/10 border border-puja-accent/20 text-xs font-medium text-puja-accent mb-6 animate-fade-in-up">
+            <span className="w-2 h-2 rounded-full bg-puja-accent animate-pulse" />
+            <Users className="w-3.5 h-3.5" />
+            <span>
+              {waitlistCount === 1 
+                ? '1 person already on the waitlist' 
+                : `${waitlistCount} people already on the waitlist`}
+            </span>
+          </div>
+        )}
         
         <p className="text-puja-secondary text-sm md:text-base mb-10 leading-relaxed">
           PujaProof is currently in development for <span className="text-puja-accent font-medium">HackSpire'26</span>. 
@@ -74,7 +107,7 @@ export default function Waitlist() {
             </p>
             <button
               onClick={() => setStatus('idle')}
-              className="text-xs text-puja-accent font-medium hover:underline"
+              className="text-xs text-puja-accent font-medium hover:underline cursor-pointer"
             >
               Add another email
             </button>

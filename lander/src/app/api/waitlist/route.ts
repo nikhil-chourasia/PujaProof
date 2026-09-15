@@ -1,50 +1,92 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { db, initDb } from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
+export async function GET() {
+  try {
+    await initDb();
+    
+    // SQL Query to retrieve all waitlist entries
+    const result = await db.execute({
+      sql: 'SELECT id, email, created_at FROM waitlist ORDER BY created_at DESC',
+      args: []
+    });
+
+    return NextResponse.json({
+      count: result.rows.length,
+      waitlist: result.rows,
+    });
+  } catch (error) {
+    console.error('SQL GET error:', error);
+    return NextResponse.json({ error: 'Failed to fetch waitlist entries' }, { status: 500 });
+  }
+}
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
+    await initDb();
 
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
-      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
-    }
+    let email = '';
 
-    const trimmedEmail = email.trim().toLowerCase();
-    const dataDir = path.join(process.cwd(), 'data');
-
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-
-    const filePath = path.join(dataDir, 'waitlist.json');
-    let waitlist: { email: string; createdAt: string }[] = [];
-
-    if (fs.existsSync(filePath)) {
+    try {
+      const body = await request.json();
+      email = body?.email || '';
+    } catch {
       try {
-        const fileData = fs.readFileSync(filePath, 'utf-8');
-        waitlist = JSON.parse(fileData);
+        const formData = await request.formData();
+        email = (formData.get('email') as string) || '';
       } catch {
-        waitlist = [];
+        const text = await request.text();
+        try {
+          const parsed = JSON.parse(text);
+          email = parsed?.email || '';
+        } catch {
+          email = text.trim();
+        }
       }
     }
 
-    const alreadyExists = waitlist.some((item) => item.email === trimmedEmail);
-
-    if (!alreadyExists) {
-      waitlist.push({
-        email: trimmedEmail,
-        createdAt: new Date().toISOString(),
-      });
-      fs.writeFileSync(filePath, JSON.stringify(waitlist, null, 2), 'utf-8');
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address.' },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: alreadyExists ? "You're already on the waitlist!" : "Thanks for joining our waitlist!" 
+    const cleanEmail = email.trim().toLowerCase();
+
+    // SQL Query: Check if the email already exists in the table
+    const existing = await db.execute({
+      sql: 'SELECT id, email FROM waitlist WHERE email = ? LIMIT 1',
+      args: [cleanEmail]
+    });
+
+    if (existing.rows.length > 0) {
+      return NextResponse.json({
+        success: true,
+        message: "You're already on the waitlist!",
+        isNew: false
+      });
+    }
+
+    // SQL Query: Insert unique email into table
+    await db.execute({
+      sql: 'INSERT INTO waitlist (email) VALUES (?)',
+      args: [cleanEmail]
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Thanks for joining our waitlist! We'll keep you posted.",
+      isNew: true
     });
   } catch (error) {
-    console.error('Waitlist API Error:', error);
-    return NextResponse.json({ error: 'Internal server error. Please try again.' }, { status: 500 });
+    console.error('SQL POST error:', error);
+    return NextResponse.json(
+      { error: 'Failed to save waitlist entry. Please try again.' },
+      { status: 500 }
+    );
   }
 }
