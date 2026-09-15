@@ -2,53 +2,57 @@ import { createClient } from '@libsql/client';
 import path from 'path';
 import fs from 'fs';
 
-// Ensure data directory exists
-const dataDir = path.join(process.cwd(), 'data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
+// Resolve fallback local path only if cloud DB is not configured
+const rootDir = process.cwd().endsWith('lander') ? process.cwd() : path.join(process.cwd(), 'lander');
+const dataDir = path.join(rootDir, 'data');
+
+if (!process.env.TURSO_DATABASE_URL && !process.env.DATABASE_URL) {
+  if (!fs.existsSync(dataDir)) {
+    try {
+      fs.mkdirSync(dataDir, { recursive: true });
+    } catch {
+      // Ignore if read-only
+    }
+  }
 }
 
-const dbPath = path.join(dataDir, 'waitlist.db');
+export const dbPath = path.join(dataDir, 'waitlist.db');
+
+// Configure client with remote Turso if available, otherwise local SQLite
+const dbUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || `file:${dbPath.replace(/\\/g, '/')}`;
+const authToken = process.env.TURSO_AUTH_TOKEN || process.env.DATABASE_AUTH_TOKEN;
 
 export const db = createClient({
-  url: `file:${dbPath.replace(/\\/g, '/')}`,
+  url: dbUrl,
+  authToken: authToken,
 });
 
 let isInitialized = false;
 
-// Helper function to initialize the SQL waitlist table and migrate existing data
 export async function initDb() {
   if (isInitialized) return;
 
-  // 1. Create SQL table with UNIQUE constraint on email
-  await db.execute(`
-    CREATE TABLE IF NOT EXISTS waitlist (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      email TEXT UNIQUE NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-  `);
+  try {
+    // 1. Create table in the database if it doesn't exist
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS waitlist (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT DEFAULT '',
+        email TEXT UNIQUE NOT NULL,
+        created_at TEXT NOT NULL
+      );
+    `);
 
-  // 2. Import existing records from JSON if available
-  const jsonPath = path.join(dataDir, 'waitlist.json');
-  if (fs.existsSync(jsonPath)) {
+    // Ensure 'name' column exists if table was created in earlier schema without name
     try {
-      const raw = fs.readFileSync(jsonPath, 'utf-8');
-      const list = JSON.parse(raw);
-      if (Array.isArray(list)) {
-        for (const item of list) {
-          if (item?.email) {
-            await db.execute({
-              sql: 'INSERT OR IGNORE INTO waitlist (email, created_at) VALUES (?, ?)',
-              args: [item.email.trim().toLowerCase(), item.createdAt || new Date().toISOString()]
-            });
-          }
-        }
-      }
+      await db.execute(`ALTER TABLE waitlist ADD COLUMN name TEXT DEFAULT '';`);
     } catch {
-      // Ignore JSON migration errors
+      // Column already exists, ignore
     }
-  }
 
-  isInitialized = true;
+    isInitialized = true;
+  } catch (err) {
+    console.error('Database initialization error:', err);
+    throw err;
+  }
 }

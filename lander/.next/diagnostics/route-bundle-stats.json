@@ -15,10 +15,10 @@
   },
   {
     "route": "/waitlist",
-    "firstLoadUncompressedJsBytes": 475006,
+    "firstLoadUncompressedJsBytes": 482390,
     "firstLoadChunkPaths": [
       ".next\\static\\chunks\\3dzdqsep0txr3.js",
-      ".next\\static\\chunks\\3txj_6vbkwsxq.js",
+      ".next\\static\\chunks\\29-gwluv-qdfl.js",
       ".next\\static\\chunks\\310vm2bl3xxpt.js",
       ".next\\static\\chunks\\2mmpezlrfmbu5.js",
       ".next\\static\\chunks\\27t_qfc-3_lzs.js",

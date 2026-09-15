@@ -105,7 +105,7 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\nikhi\\OneDrive\\Documents\\PujaProof\\lander",
+    "outputFileTracingRoot": "D:\\Hackathons\\poppins\\PujaProof\\lander",
     "enablePrerenderSourceMaps": true,
     "cacheComponents": false,
     "cacheLife": {
@@ -175,7 +175,7 @@ self.__SERVER_FILES_MANIFEST={
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 15,
+      "cpus": 7,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptOperationCache": null,
@@ -321,13 +321,13 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "reactCompiler": true,
-    "repoRoot": "C:\\Users\\nikhi\\OneDrive\\Documents\\PujaProof\\lander",
+    "repoRoot": "D:\\Hackathons\\poppins\\PujaProof\\lander",
     "turbopack": {
-      "root": "C:\\Users\\nikhi\\OneDrive\\Documents\\PujaProof\\lander"
+      "root": "D:\\Hackathons\\poppins\\PujaProof\\lander"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\Users\\nikhi\\OneDrive\\Documents\\PujaProof\\lander",
+  "appDir": "D:\\Hackathons\\poppins\\PujaProof\\lander",
   "relativeAppDir": "",
   "files": [
     ".next\\package.json",
