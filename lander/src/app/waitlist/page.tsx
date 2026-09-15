@@ -1,29 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle2, Loader2, Users, Sparkles, Clock, Search, RefreshCw, UserCheck } from 'lucide-react';
-
-interface WaitlistEntry {
-  id: number;
-  name: string;
-  email: string;
-  created_at: string;
-  position: number;
-}
+import { ArrowLeft, CheckCircle2, Loader2, Users, Sparkles } from 'lucide-react';
 
 export default function Waitlist() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
-  const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const fetchWaitlist = async () => {
-    setIsFetching(true);
+  const fetchCount = async () => {
     try {
       const res = await fetch('/api/waitlist', { cache: 'no-store' });
       if (res.ok) {
@@ -31,19 +19,14 @@ export default function Waitlist() {
         if (typeof data.count === 'number') {
           setWaitlistCount(data.count);
         }
-        if (Array.isArray(data.waitlist)) {
-          setWaitlist(data.waitlist);
-        }
       }
     } catch (err) {
-      console.error('Failed to fetch waitlist:', err);
-    } finally {
-      setIsFetching(false);
+      console.error('Failed to fetch waitlist count:', err);
     }
   };
 
   useEffect(() => {
-    fetchWaitlist();
+    fetchCount();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,11 +54,8 @@ export default function Waitlist() {
         setEmail('');
         if (typeof data.count === 'number') {
           setWaitlistCount(data.count);
-        }
-        if (Array.isArray(data.waitlist)) {
-          setWaitlist(data.waitlist);
         } else {
-          fetchWaitlist();
+          fetchCount();
         }
       } else {
         setStatus('error');
@@ -87,64 +67,9 @@ export default function Waitlist() {
     }
   };
 
-  const getDisplayName = (entry: WaitlistEntry) => {
-    if (entry.name && entry.name.trim().length > 0) {
-      return entry.name.trim();
-    }
-    const handle = entry.email.split('@')[0];
-    return handle;
-  };
-
-  const getInitials = (nameOrEmail: string) => {
-    const clean = nameOrEmail.trim();
-    if (!clean) return '?';
-    const parts = clean.split(/[.\s_-]+/);
-    if (parts.length >= 2 && parts[0] && parts[1]) {
-      return (parts[0][0] + parts[1][0]).toUpperCase();
-    }
-    return clean.slice(0, 2).toUpperCase();
-  };
-
-  const formatJoinedDate = (dateStr: string) => {
-    try {
-      const date = new Date(dateStr.replace(' ', 'T'));
-      if (isNaN(date.getTime())) return 'Recently';
-      return new Intl.DateTimeFormat('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      }).format(date);
-    } catch {
-      return 'Recently';
-    }
-  };
-
-  const filteredWaitlist = useMemo(() => {
-    if (!searchQuery.trim()) return waitlist;
-    const q = searchQuery.toLowerCase();
-    return waitlist.filter(
-      (item) =>
-        item.name.toLowerCase().includes(q) ||
-        item.email.toLowerCase().includes(q) ||
-        `#${item.position}`.includes(q)
-    );
-  }, [waitlist, searchQuery]);
-
-  // Dynamic avatar gradient based on index or string hash
-  const getAvatarGradient = (id: number) => {
-    const gradients = [
-      'from-purple-500 to-indigo-500',
-      'from-rose-500 to-pink-500',
-      'from-amber-500 to-orange-500',
-      'from-emerald-500 to-teal-500',
-      'from-blue-500 to-cyan-500',
-    ];
-    return gradients[id % gradients.length];
-  };
-
   return (
-    <div className="min-h-screen bg-puja-bg text-puja-text flex flex-center items-center px-4 sm:px-6 py-12 selection:bg-puja-accent selection:text-white">
-      <div className="w-full max-w-2xl mx-auto flex flex-col items-center animate-fade-in-up">
+    <div className="min-h-screen bg-puja-bg text-puja-text flex flex-col items-center justify-center px-4 sm:px-6 py-12 selection:bg-puja-accent selection:text-white">
+      <div className="w-full max-w-md mx-auto flex flex-col items-center animate-fade-in-up">
         
         {/* Navigation */}
         <Link 
@@ -155,7 +80,7 @@ export default function Waitlist() {
         </Link>
 
         {/* Header */}
-        <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.15] mb-4 text-center text-puja-text">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-4 text-center text-puja-text">
           Join the PujaProof Waitlist
         </h1>
         
@@ -176,7 +101,7 @@ export default function Waitlist() {
         </p>
 
         {/* Signup Form / Success Banner */}
-        <div className="w-full max-w-md mb-12">
+        <div className="w-full mb-6">
           {status === 'success' ? (
             <div className="w-full bg-white border border-puja-border rounded-[24px] p-6 sm:p-8 shadow-sm flex flex-col items-center text-center animate-fade-in-up">
               <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-puja-accent mb-4">
@@ -236,9 +161,7 @@ export default function Waitlist() {
                     <Loader2 className="w-4 h-4 animate-spin" /> Submitting...
                   </>
                 ) : (
-                  <>
-                    Join Waitlist
-                  </>
+                  'Join Waitlist'
                 )}
               </button>
 

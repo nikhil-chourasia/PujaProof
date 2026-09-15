@@ -27,6 +27,9 @@ dist/
 *.env
 */.env*
 *.pem
+*.db
+*/data/*.db
+data/*.db
 
 # Debug Logs
 npm-debug.log*
