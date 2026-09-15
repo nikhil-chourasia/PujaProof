@@ -37,11 +37,11 @@ var _s = __turbopack_context__.k.signature();
 function Home() {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(3);
-    if ($[0] !== "c7a24b7460aacca7144d0fc83ebd30fd59b9fe5126d6329c8e2d395f469c00c5") {
+    if ($[0] !== "9eb8ca6358af9e3c6f87aeaf69a4729c4a7686d382c83d2547079a531b5d1d37") {
         for(let $i = 0; $i < 3; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c7a24b7460aacca7144d0fc83ebd30fd59b9fe5126d6329c8e2d395f469c00c5";
+        $[0] = "9eb8ca6358af9e3c6f87aeaf69a4729c4a7686d382c83d2547079a531b5d1d37";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -177,11 +177,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function AudienceSplit() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(13);
-    if ($[0] !== "d0779213dc79b224f67feace7ac3b2d8f9215e1f0b4f4934ec94efa771d34619") {
+    if ($[0] !== "a04615fc65dc24f7b88e2b457ecf082d2a29f5da099f3d71de3d8abace9d05a5") {
         for(let $i = 0; $i < 13; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "d0779213dc79b224f67feace7ac3b2d8f9215e1f0b4f4934ec94efa771d34619";
+        $[0] = "a04615fc65dc24f7b88e2b457ecf082d2a29f5da099f3d71de3d8abace9d05a5";
     }
     let t0;
     let t1;
@@ -496,11 +496,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 function DashboardPreview() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(18);
-    if ($[0] !== "e52d249683ef331995af87076f4519a48ffcfdb2ba21682c0d0e84a4d44d9ee0") {
+    if ($[0] !== "91a1c65f53a50d8298d66bf5e91681ed7ed8c3a4e030c9aed58dc448158635c4") {
         for(let $i = 0; $i < 18; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "e52d249683ef331995af87076f4519a48ffcfdb2ba21682c0d0e84a4d44d9ee0";
+        $[0] = "91a1c65f53a50d8298d66bf5e91681ed7ed8c3a4e030c9aed58dc448158635c4";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -1085,11 +1085,11 @@ var _s = __turbopack_context__.k.signature();
 function FAQ() {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(5);
-    if ($[0] !== "e04034fa03f7c5262033a643d8644f50a75dd27d4b5fc8ff9b34894175725393") {
+    if ($[0] !== "6587fa79291178ce367711a4a38344b638ebc7bb328c6f6ef84c34262dbcfef4") {
         for(let $i = 0; $i < 5; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "e04034fa03f7c5262033a643d8644f50a75dd27d4b5fc8ff9b34894175725393";
+        $[0] = "6587fa79291178ce367711a4a38344b638ebc7bb328c6f6ef84c34262dbcfef4";
     }
     const [openIdx, setOpenIdx] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     let t0;
@@ -1256,11 +1256,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function FeaturesGrid() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(4);
-    if ($[0] !== "7ac088e71e50e30c40aa25081ee11e9c5a7bef5441ea6e96a6583ca5b75269b2") {
+    if ($[0] !== "54639bfbda9d97f6cc78ea074d4692aa73405b9b7245b668e6b78a628fc4b7f3") {
         for(let $i = 0; $i < 4; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "7ac088e71e50e30c40aa25081ee11e9c5a7bef5441ea6e96a6583ca5b75269b2";
+        $[0] = "54639bfbda9d97f6cc78ea074d4692aa73405b9b7245b668e6b78a628fc4b7f3";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -1415,11 +1415,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function Footer() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(8);
-    if ($[0] !== "c32cbd098493a1fe5059a28793e5a1574c7dfda7b0229bfa224301062ba2f77b") {
+    if ($[0] !== "6cbc89e704f253c44ecebf1f8494007c5d8baa3faad57fa814d841d216b4407b") {
         for(let $i = 0; $i < 8; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c32cbd098493a1fe5059a28793e5a1574c7dfda7b0229bfa224301062ba2f77b";
+        $[0] = "6cbc89e704f253c44ecebf1f8494007c5d8baa3faad57fa814d841d216b4407b";
     }
     let t0;
     let t1;
@@ -1648,11 +1648,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function Hero() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(10);
-    if ($[0] !== "a515146bd9eb83487541563aaed30e0602a3b5a155057d814b9e8ae5e46459e3") {
+    if ($[0] !== "30f7edf1e223fbf2f620b7ac5b54899fafffd4f012fc2952016789552b5a8c12") {
         for(let $i = 0; $i < 10; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "a515146bd9eb83487541563aaed30e0602a3b5a155057d814b9e8ae5e46459e3";
+        $[0] = "30f7edf1e223fbf2f620b7ac5b54899fafffd4f012fc2952016789552b5a8c12";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -2032,11 +2032,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function HowItWorks() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(6);
-    if ($[0] !== "b47081cdb15c882bd780f4abbc948e206bad4ce55bfbad1b2367b5778c500637") {
+    if ($[0] !== "b804274dea167fc3bf618f8b56c603c808a1abfa092c6ed5a2b3ff5a8bb64524") {
         for(let $i = 0; $i < 6; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "b47081cdb15c882bd780f4abbc948e206bad4ce55bfbad1b2367b5778c500637";
+        $[0] = "b804274dea167fc3bf618f8b56c603c808a1abfa092c6ed5a2b3ff5a8bb64524";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -2247,11 +2247,11 @@ var _s = __turbopack_context__.k.signature();
 function NavBar() {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(17);
-    if ($[0] !== "5897a2f7c748ab69eac507939dd15ac32e33f2e73a8ab55f82ea361a022aa5ea") {
+    if ($[0] !== "8b2f0b3d91b9e21935ba88345a58add5f16e61939da68589098eb4ceb529155b") {
         for(let $i = 0; $i < 17; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "5897a2f7c748ab69eac507939dd15ac32e33f2e73a8ab55f82ea361a022aa5ea";
+        $[0] = "8b2f0b3d91b9e21935ba88345a58add5f16e61939da68589098eb4ceb529155b";
     }
     const [isOpen, setIsOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     let t0;
@@ -2556,11 +2556,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function Problem() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(6);
-    if ($[0] !== "c600e6db2a1cab7727704766dd5692a6375cca973addaaf57da27306b4f9573f") {
+    if ($[0] !== "e45a406d727a9dbb929d05736109945bf4e23fb76a39f5a8483231fdd9c10a35") {
         for(let $i = 0; $i < 6; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c600e6db2a1cab7727704766dd5692a6375cca973addaaf57da27306b4f9573f";
+        $[0] = "e45a406d727a9dbb929d05736109945bf4e23fb76a39f5a8483231fdd9c10a35";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -2790,11 +2790,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function VoiceAssistant() {
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(7);
-    if ($[0] !== "332a32a454948533f0db27452dd591a051642345a0cbed81e22f53b102d3d477") {
+    if ($[0] !== "8dc1215f4135c9765f91bcbe9dff3b8e4b148622968c61db7d635736ed4d7529") {
         for(let $i = 0; $i < 7; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "332a32a454948533f0db27452dd591a051642345a0cbed81e22f53b102d3d477";
+        $[0] = "8dc1215f4135c9765f91bcbe9dff3b8e4b148622968c61db7d635736ed4d7529";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {

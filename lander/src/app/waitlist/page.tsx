@@ -143,7 +143,7 @@ export default function Waitlist() {
   };
 
   return (
-    <div className="min-h-screen bg-puja-bg text-puja-text flex flex-col items-center px-4 sm:px-6 py-12 selection:bg-puja-accent selection:text-white">
+    <div className="min-h-screen bg-puja-bg text-puja-text flex flex-center items-center px-4 sm:px-6 py-12 selection:bg-puja-accent selection:text-white">
       <div className="w-full max-w-2xl mx-auto flex flex-col items-center animate-fade-in-up">
         
         {/* Navigation */}
@@ -237,7 +237,7 @@ export default function Waitlist() {
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4 text-purple-300" /> Join Waitlist
+                    Join Waitlist
                   </>
                 )}
               </button>
@@ -249,119 +249,8 @@ export default function Waitlist() {
           )}
         </div>
 
-        {/* Live Community Waitlist Display */}
-        <div className="w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <div>
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-puja-text flex items-center gap-2">
-                <Users className="w-5 h-5 text-puja-accent" />
-                People on the Waitlist
-              </h2>
-              <p className="text-xs text-puja-secondary mt-0.5">
-                Real-time queue of community members who applied
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {/* Search filter */}
-              <div className="relative w-full sm:w-48">
-                <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-puja-secondary" />
-                <input
-                  type="text"
-                  placeholder="Search applicants..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-8 pr-3 py-1.5 text-xs rounded-full border border-puja-border bg-white text-puja-text placeholder:text-puja-secondary focus:outline-none focus:border-puja-accent"
-                />
-              </div>
-
-              {/* Refresh button */}
-              <button
-                onClick={fetchWaitlist}
-                disabled={isFetching}
-                title="Refresh waitlist"
-                className="p-2 rounded-full border border-puja-border bg-white text-puja-secondary hover:text-puja-text hover:border-puja-accent transition-colors disabled:opacity-50 cursor-pointer"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${isFetching ? 'animate-spin text-puja-accent' : ''}`} />
-              </button>
-            </div>
-          </div>
-
-          {/* List of Applicants */}
-          <div className="bg-white border border-puja-border rounded-[24px] overflow-hidden shadow-sm">
-            {isFetching && waitlist.length === 0 ? (
-              <div className="p-12 flex flex-col items-center justify-center text-puja-secondary gap-3">
-                <Loader2 className="w-6 h-6 animate-spin text-puja-accent" />
-                <span className="text-sm">Loading waitlist applicants...</span>
-              </div>
-            ) : filteredWaitlist.length === 0 ? (
-              <div className="p-12 text-center text-puja-secondary flex flex-col items-center gap-2">
-                <UserCheck className="w-8 h-8 text-puja-secondary/40" />
-                <p className="text-sm font-medium">
-                  {searchQuery ? 'No applicants match your search.' : 'No one has joined yet. Be the very first!'}
-                </p>
-              </div>
-            ) : (
-              <div className="divide-y divide-puja-border/60">
-                {filteredWaitlist.map((entry) => {
-                  const displayName = getDisplayName(entry);
-                  const initials = getInitials(entry.name || displayName);
-                  const gradient = getAvatarGradient(entry.position);
-
-                  return (
-                    <div 
-                      key={entry.id} 
-                      className="p-4 sm:p-5 flex items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors"
-                    >
-                      {/* Avatar & User Details */}
-                      <div className="flex items-center gap-3.5 min-w-0">
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-tr ${gradient} text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm`}>
-                          {initials}
-                        </div>
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2">
-                            <h4 className="text-sm font-semibold text-puja-text truncate">
-                              {displayName}
-                            </h4>
-                            {entry.position === 1 && (
-                              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
-                                👑 #1 Pioneer
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-puja-secondary truncate">
-                            {entry.email}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Position & Time */}
-                      <div className="flex flex-col items-end shrink-0 gap-1">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-puja-accent/10 text-puja-accent border border-puja-accent/20">
-                          Spot #{entry.position}
-                        </span>
-                        <span className="text-[11px] text-puja-secondary/80 flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {formatJoinedDate(entry.created_at)}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Footer Summary */}
-            {waitlist.length > 0 && (
-              <div className="p-3.5 bg-slate-50 border-t border-puja-border text-center text-xs text-puja-secondary font-medium">
-                Total {waitlist.length} registered applicant{waitlist.length === 1 ? '' : 's'} • Live synced from SQLite database
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Privacy Note */}
-        <p className="text-xs text-puja-secondary mt-8 text-center">
+        <p className="text-xs text-puja-secondary text-center">
           No spam. We'll only send launch notifications and updates for HackSpire'26.
         </p>
       </div>
